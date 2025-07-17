@@ -45,6 +45,9 @@ It is possible to run a visualisation of the results using `streamlit`:
 $ streamlit run features_bench/app/__init__.py
 ```
 
+<img width="1576" height="939" alt="Screenshot from 2025-07-17 11-58-33" src="https://github.com/user-attachments/assets/ea259775-0f8f-4a9a-9cac-59e36f5a9bcb" />
+
+
 ## Objectives
 
 To demonstrate a process for the definition of (standard-assuring) Web agents programmed for different tasks required
