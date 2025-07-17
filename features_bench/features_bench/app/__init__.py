@@ -155,17 +155,6 @@ def main():
             )
             st.plotly_chart(fig_count, use_container_width=True)
 
-        # Protocol analysis
-        st.header("📋 Protocol Analysis")
-
-        protocol_counts = df["protocol_name"].value_counts()
-        fig_protocols = px.pie(
-            values=protocol_counts.values,
-            names=protocol_counts.index,
-            title="Distribution of BSPL Protocols",
-        )
-        st.plotly_chart(fig_protocols, use_container_width=True)
-
         # Interactive question-response viewer
         st.header("💬 Question-Response Pairs")
 

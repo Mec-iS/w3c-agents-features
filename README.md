@@ -1,5 +1,7 @@
 # features
 
+Features engineering for structured generation for formal protocols.
+
 ## mission
 An operational framework for controlled generation to keep developing the standard, writing validation tests, testing hypothesis.
 
