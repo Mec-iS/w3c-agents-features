@@ -16,18 +16,20 @@ Your role is TRANSLATOR FOR BLINDLY SIMPLE PROTOCOL LANGUAGE (BSPL) You are an a
 
 ANSWER:
 
-Define a protocol named "Purchase" that coordinates a buying transaction involving three roles: B (Buyer), S (Seller), and Shipper.
+Define a protocol named "Purchase" that models an extended purchase process involving a buyer (B), a seller (S), and a shipper (Shipper). The protocol has four public parameters: "ID" (key), "item", "price", and "outcome", and five private parameters: "address", "shipped", "accept", "reject", and "resp".
 
-- The protocol contains four output parameters: "ID" (transaction key), "item", "price", and "outcome".
-- There are private parameters managed internally: address, shipped, accept, reject, and resp.
+The protocol defines the following operations:
 
-**Operations:**
+"rfq": B sends a request for quotation to S with output parameters "ID" and "item".
 
-1. **rfq**: Buyer sends a request for quotation to the Seller, specifying a transaction ID and the desired item.
-2. **quote**: Seller replies to Buyer with the quoted price for the requested item (referencing the transaction ID and item).
-3. **accept**: Buyer sends acceptance to Seller, including the transaction ID, item, price, shipping address, and internal confirmations.
-4. **reject**: Buyer notifies Seller of a rejection, providing transaction ID, item, price, outcome, and related private values.
-5. **ship**: If accepted, Seller instructs the Shipper to deliver the item, supplying transaction details and address, receiving a shipping confirmation.
-6. **deliver**: Shipper confirms delivery to Buyer, indicating completion, and provides the final outcome.
+"quote": S replies to B with "ID", "item" (as inputs), and provides a quoted "price".
 
-This protocol captures the interactions for requesting, quoting, accepting or rejecting offers, and managing the shipping and delivery stages with clear role assignments and data flow for each step.
+"accept": If B accepts, it sends "ID", "item", "price", "address", "resp", and "accept" to S.
+
+"reject": If B rejects, it sends "ID", "item", "price", and outputs "outcome", "resp", and "reject" to S.
+
+"ship": S instructs Shipper to ship the item by providing "ID", "item", and "address", and receives confirmation with "shipped".
+
+"deliver": Shipper notifies B of delivery status with "ID", "item", "address", and outputs "outcome".
+
+This protocol enables request, quotation, acceptance or rejection, shipping via a third party, and final delivery notification, using role-specific operations and clearly defined parameters.

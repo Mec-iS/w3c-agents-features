@@ -17,17 +17,4 @@ Your role is TRANSLATOR FOR BLINDLY SIMPLE PROTOCOL LANGUAGE (BSPL) You are an a
 
 ANSWER:
 
-Model a protocol named "Purchase" that defines a complete transaction workflow between a **Buyer (B)**, a **Seller (S)**, and a **Shipper**.
-
-The protocol specifies the following parameters:
-*   **Public outputs**: `ID` (transaction key), `item`, `price`, and `outcome`.
-*   **Private data**: `address`, `shipped`, `accept`, `reject`, and `resp` for internal process management.
-
-The interaction proceeds through the following operations:
-1.  **Request for Quotation**: B sends an `rfq` message to S, which generates the transaction `ID` and specifies the desired `item`.
-2.  **Quote**: S replies to B with a `quote`, providing the `price` for the requested item.
-3.  **Acceptance/Rejection**: B communicates its decision to S:
-    *   An `accept` message confirms the purchase, providing the shipping `address` and setting internal confirmation flags.
-    *   A `reject` message terminates the process, setting the final `outcome` and internal rejection flags.
-4.  **Shipping**: Upon acceptance, S sends a `ship` command to the Shipper, including the transaction `ID`, `item`, and `address`, and receives an internal shipping confirmation.
-5.  **Delivery**: The Shipper sends a `deliver` message to B to confirm the delivery, which establishes the final `outcome` of the transaction.
+Model a protocol named "Purchase" involving three roles: B (Buyer), S (Seller), and Shipper. It defines several output parameters: an "ID" (key), an "item", a "price", and an "outcome". It also uses private parameters for internal state management: "address", "shipped", "accept", "reject", and "resp". The process begins with B sending an "rfq" (request for quotation) to S to inquire about an "item" and establish a transaction "ID". S replies to B with a "quote", providing a "price". B can then either "accept" the quote, providing a shipping "address", or "reject" it. If accepted, S instructs the Shipper to "ship" the "item". Finally, the Shipper confirms the "delivery" to B, which sets the final "outcome".

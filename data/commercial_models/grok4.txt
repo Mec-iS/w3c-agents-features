@@ -16,17 +16,11 @@ Your role is TRANSLATOR FOR BLINDLY SIMPLE PROTOCOL LANGUAGE (BSPL) You are an a
 
 ANSWER:
 
-Create a protocol named "Purchase" that coordinates a complete buying transaction with shipping between three roles: B (Buyer), S (Seller), and Shipper.
-
-The protocol defines four output parameters: ID (transaction key), item, price, and outcome. It includes private parameters for internal management: address, shipped, accept, reject, and resp.
+Create a protocol named "Purchase" involving three roles: B (Buyer), S (Seller), and Shipper. The protocol has output parameters: "ID" (key), "item", "price", and "outcome". Private parameters include: address, shipped, accept, reject, resp.
 
 The interaction flow consists of six operations:
-
-1. **rfq** - B sends request for quotation to S, generating transaction ID and specifying desired item
-2. **quote** - S responds to B with pricing for the requested item using the transaction ID
-3. **accept** - B confirms purchase to S, providing transaction details, shipping address, and setting acceptance flags
-4. **reject** - B declines purchase to S, providing transaction details and final outcome with rejection flags
-5. **ship** - S instructs Shipper to deliver the item using transaction ID, item details, and shipping address, receiving shipment confirmation
-6. **deliver** - Shipper confirms delivery completion to B, providing transaction details and final outcome
-
-The protocol supports both acceptance and rejection paths, with shipping occurring only upon buyer acceptance, and maintains complete transaction traceability through the ID parameter across all operations.
+1. B sends "rfq" (request for quotation) to S requesting ID and item
+2. S responds with "quote" to B providing the price for the specified ID and item
+3. B can either "accept" the quote (sending ID, item, price and generating address, resp, accept) or "reject" it (sending ID, item, price and generating outcome, resp, reject) to S
+4. Upon acceptance, S sends "ship" to Shipper with ID, item, address, generating shipped status
+5. Shipper completes the process by sending "deliver" to B with ID, item, address, generating the final outcome

@@ -16,20 +16,28 @@ Your role is TRANSLATOR FOR BLINDLY SIMPLE PROTOCOL LANGUAGE (BSPL) You are an a
 
 ANSWER:
 
-Protocol “Purchase” (Buyer B, Seller S, Shipper)
+Protocol “Purchase”.
 
--  Public parameters (outputs):  
-  – ID key transaction identifier  
-  – item requested goods  
-  – price quoted amount  
-  – outcome final status  
+Roles  
+-  B (Buyer)  
+-  S (Seller)  
+-  Shipper  
 
--  Private parameters: address, shipped, accept, reject, resp  
+Public parameters  
+-  ID – key, first produced by Buyer  
+-  item – produced with the rfq  
+-  price – produced with the quote  
+-  outcome – produced either by reject or by deliver  
+
+Private parameters  
+address, shipped, accept, reject, resp  
 
 Message flow  
-1. B → S  rfq [ out ID, out item ]  
-2. S → B  quote [ in ID, in item, out price ]  
-3. B → S  accept [ in ID, in item, in price, out address, out resp, out accept ]  
-4. B → S  reject [ in ID, in item, in price, out outcome, out resp, out reject ]  
-5. S → Shipper  ship [ in ID, in item, in address, out shipped ]  
-6. Shipper → B  deliver [ in ID, in item, in address, out outcome ]
+1. rfq B → S {ID, item}   (ID and item are generated here)  
+2. quote S → B {ID, item (in), price (out)}  
+3a. accept B → S {ID, item, price (in), address, resp, accept (out)}  
+ or  
+3b. reject B → S {ID, item, price (in), outcome, resp, reject (out)}  
+4. (ship path, only after accept)  
+   ship S → Shipper {ID, item, address (in), shipped (out)}  
+   deliver Shipper → B {ID, item, address (in), outcome (out)}

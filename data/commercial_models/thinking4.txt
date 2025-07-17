@@ -16,19 +16,6 @@ Your role is TRANSLATOR FOR BLINDLY SIMPLE PROTOCOL LANGUAGE (BSPL) You are an a
 
 ANSWER:
 
-Create a protocol named "Purchase" that models a complete buying transaction involving three roles: B (Buyer), S (Seller), and Shipper.
+Design a protocol named "Purchase" modeling a complete purchase and delivery process involving three roles: B (Buyer), S (Seller), and Shipper. Parameters include "ID" (output key), "item", "price", and "outcome" (all outputs). Private parameters are address, shipped, accept, reject, and resp. 
 
-**Parameters:**
-- Public outputs: ID (transaction key), item, price, outcome
-- Private parameters: address, shipped, accept, reject, resp
-
-**Operations:**
-
-1. **rfq**: B sends request for quotation to S, generating transaction ID and specifying desired item
-2. **quote**: S responds to B with pricing for the requested item using the transaction ID
-3. **accept**: B confirms purchase to S, providing transaction details, shipping address, and internal response/acceptance flags
-4. **reject**: B declines purchase to S, providing transaction details, final outcome, and internal response/rejection flags
-5. **ship**: S instructs Shipper to deliver the item using transaction ID, item details, and shipping address, receiving internal shipment confirmation
-6. **deliver**: Shipper confirms delivery to B, providing transaction details and establishing the final outcome
-
-The protocol supports both acceptance and rejection paths, with shipping initiated only upon buyer acceptance, maintaining transaction traceability through the ID parameter across all operations.
+The process begins with B sending "rfq" to S to request quotation with ID and item. S responds with "quote" containing price. B can either "accept" (providing address, resp, accept) or "reject" (providing outcome, resp, reject) the quote. Upon acceptance, S sends "ship" instruction to Shipper with ID, item, and address. Finally, Shipper sends "deliver" confirmation to B with the final outcome.

@@ -16,20 +16,8 @@ Your role is TRANSLATOR FOR BLINDLY SIMPLE PROTOCOL LANGUAGE (BSPL) You are an a
 
 ANSWER:
 
-Create a protocol named "Purchase" that models a complete buying transaction with shipping, involving three roles: B (Buyer), S (Seller), and Shipper. The protocol defines four output parameters: "ID" (transaction key), "item", "price", and "outcome". It includes private parameters: address, shipped, accept, reject, and resp.
+Define a protocol named "Purchase" that models a complete purchase and delivery workflow involving three roles: B (Buyer), S (Seller), and Shipper. The protocol uses output parameters "ID" (key), "item", "price", and "outcome", with private parameters "address", "shipped", "accept", "reject", and "resp".
 
-The transaction flow consists of six operations:
+The workflow begins with B sending "rfq" to S to request a quote, generating ID and item. S responds with "quote" containing the price for the specified ID and item. B then has two options: send "accept" (providing address and generating resp and accept parameters) or send "reject" (generating outcome, resp, and reject parameters).
 
-rfq (request for quotation): B sends to S, generating the transaction ID and item specification
-
-quote: S responds to B with the item details and price
-
-accept: B sends acceptance to S, providing shipping address and acceptance confirmation
-
-reject: B sends rejection to S, providing outcome and rejection confirmation
-
-ship: S initiates shipping with Shipper, using transaction details and address
-
-deliver: Shipper completes delivery to B, confirming final outcome
-
-The protocol supports both acceptance and rejection paths, with shipping only occurring upon acceptance. All operations maintain transaction traceability through the ID parameter, and the outcome parameter captures the final transaction result.
+If accepted, S sends "ship" to Shipper with the ID, item, and address, generating a shipped parameter. Finally, Shipper sends "deliver" to B with ID, item, and address, producing the final outcome.
