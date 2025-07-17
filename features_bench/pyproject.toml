@@ -30,7 +30,9 @@ requires-python = ">=3.12"
 dependencies = [
     "langchain",
     "langchain-ollama",
-    "structlog"
+    "structlog",
+    "streamlit",
+    "plotly"
 ]
 
 # Optional dependencies for development

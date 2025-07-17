@@ -1,18 +1,17 @@
 from functools import lru_cache
-from string import Template
 from pathlib import Path
+from string import Template
 
 from langchain_core.prompts import PromptTemplate
 from langchain_ollama import OllamaLLM
 
-from features_bench.core.base._01_parse import load_parse
-
 from features_bench.__init__ import logger
+from features_bench.core.base._01_parse import load_parse
 
 
 @lru_cache()
 def load_examples():
-    examples = """\n\nHere some examples of translations with input a BSPL payload 
+    examples = """\n\nHere some examples of translations with input a BSPL payload
     and expected output a Natural Language definition of the input. Please use these as reference
     expected output:"""
     for proto, nl in load_parse():
@@ -23,8 +22,7 @@ def load_examples():
 
 @lru_cache()
 def create_prompt_template(node_title: str, context_content: str) -> str:
-    """ Safely handles content with curly braces by using $ placeholders.
-    """
+    """Safely handles content with curly braces by using $ placeholders."""
     logger.info("Building template once")
     # Use Template class for safer string substitution
     template_builder = Template(open(Path(__file__).parent / "_prompt.txt", mode="r").read())
@@ -40,10 +38,8 @@ def create_prompt_template(node_title: str, context_content: str) -> str:
     return PromptTemplate.from_template(partial_template)
 
 
-def query_context(
-    node_title: str, context_content: str, payload: str, model="smollm2"
-) -> str:
-    """ Build the query context for the given payload and invoke the LLM API. """
+def query_context(node_title: str, context_content: str, payload: str, model="smollm2") -> str:
+    """Build the query context for the given payload and invoke the LLM API."""
     logger.info("Building prompt")
 
     examples = load_examples()

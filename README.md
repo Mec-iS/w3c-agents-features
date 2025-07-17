@@ -29,16 +29,21 @@ $ ollama run <MODEL>
 ```
 Models available: [link](https://ollama.com/library).
 
-## Install
+## install package
 
 ```
 $ conda create -n features python=3.12
 $ conda activate features
-$ pip install -e .
+$ cd features_bench && pip install -e .[dev]
 $ git clone https://gitlab.com/masr/bspl.git
 $ pip install -e ./bspl
 ```
 
+## run visualisation
+It is possible to run a visualisation of the results using `streamlit`:
+```
+$ streamlit run features_bench/app/__init__.py
+```
 
 ## Objectives
 

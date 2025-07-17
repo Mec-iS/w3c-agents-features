@@ -1,6 +1,5 @@
 import argparse
 from pathlib import Path
-import logging
 
 from features_bench.__init__ import logger
 from features_bench.core.base._01_parse import load_parse
