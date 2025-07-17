@@ -1,0 +1,10 @@
+Transportation  {
+ roles C, W, R, V // Central, Warehouse, RFIDScanner, Vehicle
+ parameters in product key, out delivery-info, out start-delivery
+ private tag-info, tag-updated
+
+ C $\mo$ W: Order[in product key, out delivery-info]
+ W $\mo$ R: RequestTag[in product key, in delivery-info, out tag-info]
+ R $\mo$ W: NotifyTagUpdated[in product key, in tag-info, out tag-updated]
+ W $\mo$ V: StartDelivery[in product key, out start-delivery]
+}

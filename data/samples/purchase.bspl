@@ -1,0 +1,13 @@
+Purchase {
+ roles B, S, Shipper
+ parameters out ID key, out item, out price, out outcome
+ private address, shipped, accept, reject, resp
+
+ B -> S: rfq[out ID, out item]
+ S -> B: quote[in ID, in item, out price]
+ B -> S: accept[in ID, in item, in price, out address, out resp, out accept]
+ B -> S: reject[in ID, in item, in price, out outcome, out resp, out reject]
+
+ S -> Shipper: ship[in ID, in item, in address, out shipped]
+ Shipper -> B: deliver[in ID, in item, in address, out outcome]
+}

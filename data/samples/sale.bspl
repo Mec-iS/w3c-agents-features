@@ -1,0 +1,23 @@
+Sale {
+  roles Buyer, Seller, Bank, Shipper
+  parameters out Id key, out item, out price, out outcome
+  private address, decision, payinfo, instruction, authcode, choice, acc, bail
+
+  Seller -> Buyer: offer[out Id key, out item, out price]
+  Buyer  -> Seller: accept[in Id key, in item, in price, out address, out acc, out decision]
+  Buyer  -> Seller: reject[in Id key, in item, in price, out decision, out outcome]
+
+  Seller -> Buyer:  rescind[in Id key, in item, in price, out bail, nil payinfo, nil instruction]
+
+  Buyer -> Seller:  rescindAck[in Id key, in item, in price, in bail, nil authcode, out outcome]
+
+  //Buyer authorizes Bank if not rescinded
+  Buyer  -> Bank: pay[in Id key, in price, nil bail, in acc, out authcode]
+  Bank   -> Seller: transfer[in Id key, in price, in authcode, out payinfo]
+
+  //Shipper either instructs Shipper to ship or bank to refund
+  Seller -> Shipper: ship[in Id key, in item, in address, in payinfo, out instruction, out choice]
+
+  Seller -> Bank:  refund[in Id key, in item, in payinfo, out choice, out outcome]
+  Shipper -> Buyer: deliver[in Id key, in item, in address, out outcome]
+}

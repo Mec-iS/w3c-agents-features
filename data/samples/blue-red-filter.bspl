@@ -1,0 +1,10 @@
+CountBlue {
+  roles U, S, F, C // user, source, filter, counter
+  parameters out ID key, out count
+  private instance, color, ok
+
+  U -> S: Start[out ID key]
+  S -> F: Emit[in ID key, out instance key, out color]
+  F -> C: Match[in ID key, in instance key, in color, out ok]
+  C -> U: Result[in ID key, out count]
+}

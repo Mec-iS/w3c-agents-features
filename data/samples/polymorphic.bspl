@@ -1,0 +1,10 @@
+Polymorphic {
+  roles A, B
+  parameters out ID key, out done
+  private extra
+
+  A -> B: ping[out ID key]
+  B -> A: pong[in ID key, out done]
+  // polymorphic
+  B -> A: pong[in ID key, out done, out extra]
+}

@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "features_bench"
+version = "0.1.0"
+description = "AI-powered application using LangChain, LangGraph, and LlamaIndex"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [
+    {name = "Mec-iS", email = "your.email@example.com"}
+]
+maintainers = [
+    {name = "Mec-iS", email = "your.email@example.com"}
+]
+keywords = ["ai", "langchain", "llm", "rag", "agents"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.12"
+
+# Core dependencies
+dependencies = [
+    "langchain",
+    "langchain-ollama",
+    "structlog"
+]
+
+# Optional dependencies for development
+[project.optional-dependencies]
+dev = [
+    "ruff",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/your-project-name"
+Repository = "https://github.com/yourusername/your-project-name"
+Documentation = "https://your-project-name.readthedocs.io"
+"Bug Tracker" = "https://github.com/yourusername/your-project-name/issues"
+
+# [project.scripts]
+# your-cli-tool = "your_project.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["features_bench"]
+include = ["bspl"]
+
+[tool.setuptools.package-dir]
+"" = "features_bench"
+
+# Ruff configuration
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "Q", "I"]
+ignore = ["E203", "E501"]
+
+# Exclude a variety of commonly ignored directories
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+

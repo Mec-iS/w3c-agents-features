@@ -1,0 +1,17 @@
+// A classic children's solo play: An evil landlord (Mustache) demands rent from the poor maiden (Bow).
+// She cannot pay, the landlord insists, and a third party (Tie) steps in to help and pay on her behalf.
+// Mustache relents, Bow thanks Tie, and everyone is happy ever after.
+
+Rent {
+  roles Bow, Tie, Mustache
+  parameters out ID key, out amount, out tx, out stop, out thanks
+  private refusal, insistence, complaint
+
+  Mustache -> Bow: Demand[out ID, out amount]
+  Bow -> Mustache: Refuse[in ID, in amount, out refusal]
+  Mustache -> Bow: Insist[in ID, in refusal, out insistence]
+  Bow -> Tie: Plea[in ID, in amount, in insistence, out complaint]
+  Tie -> Mustache: Payment[in ID, in amount, out tx]
+  Mustache -> Bow: Relent[in ID, in tx, out stop]
+  Bow -> Tie: Thank[in ID, in stop, out thanks]
+}

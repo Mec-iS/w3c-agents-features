@@ -1,0 +1,11 @@
+Ebusiness {
+ roles Buyer, Seller, Bank
+ parameters out ID key,out item,out price,out payment,out status
+ private decision, details
+
+ Seller -> Buyer: Offer[out ID key,out item,out price]
+ Buyer  -> Seller: Accept[in ID key,in item,in price,out decision]
+ Buyer  -> Bank: Instruct[in ID key,in price,out details]
+ Bank   -> Seller: Transfer[in ID key,in price,in details,out payment]
+ Seller -> Buyer: Shipment[in ID key,in item,in price,out status]
+}

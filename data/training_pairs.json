@@ -1,0 +1,50 @@
+[
+  {
+    "natural_language": "Provide a protocol named \"Pay\" that describe the operation \"PayM\".\nIt requires two roles Payer and Payee.\nIt takes as input parameters a \"key\" of type ID and an \"amount\".\n\"PayM\" is the operation of paying from a Payer to a Payee that takes\nas input the input parameters.",
+    "bspl": "Pay {\n    roles Payer , Payee\n    parameters in ID key , in amount\n    Payer → Payee : payM [ in ID , in amount ]\n}"
+  },
+  {
+    "natural_language": "Model a payload for a buy-sell scenario in which two parties needs to establish a basic understanding of what is the state for\n demand-offer of a particular good. Use this information to print a BSPL protocol that defines two roles \"Seller\"\n and \"Buyer\" and three parameters \"key\" that is an input ID, and as outputs a \"price\" and an \"item\". One operation\n is defined from the Buyer to the Seller called \"rfq\" (request for quotation). The second operation is defined from\n the Seller to the Buyer and it is called \"quote\".\n Please print the BSPL object describing this protocol and fill in the parameters for the two operations.",
+    "bspl": "Offer {\n    roles Buyer, Seller\n    parameters in ID key , out item , out price\n    Buyer → Seller: rfq [ in ID , out item ]\n    Seller → Buyer : quote [ in ID , in item , out price ]\n}"
+  },
+  {
+    "natural_language": "Model a payload for a buy-sell scenario in which two parties needs to establish a basic understanding of what is the state for\n demand-offer of a particular good.\nUse this information to print a BSPL protocol called \"Order\" that defines two roles \"B\" and \"S\" (equivalent to the buyer in the\n buying process and the seller in the same transaction) and four parameters \"key\" that is an input ID for the\n transaction, and as outputs a \"price\" for the price of the ordered goods, an \"item\" as a reference for the item\n object of the transaction and a \"rID\" that is the generated order identification.\n One operation is defined from the B to the S called \"rfq\" (request for quotation). The second operation is\n defined from the Seller to the Buyer and it is called \"quote\". Two more operations are defined to acknoledge the\n submission of the order: \"accept\" and \"reject\" that goes from B to S to communicate the status of the order.\n Please print the BSPL object describing this protocol and fill in the parameters for the two operations. Fill in the\n missing operations' signatures to adhere to the process happening in a commercial setting.",
+    "bspl": "Order {\n    roles B, S\n    parameters in ID key , out item , out price , out rID\n    B → S: rfq [ in ID , out item ]\n    S → B: quote [ in ID , in item , out price ]\n    B → S: accept [ in ID , in item , in price , out rID ]\n    B → S: reject [ in ID , in item , in price , out rID ]\n}"
+  },
+  {
+    "natural_language": "The buyer sends a purchase order with item ID and quantity to the seller.",
+    "bspl": "PurchaseOrder {\n  roles B, S\n  parameters in ID key, in quantity, out price\n    B → S: order [ in ID , in quantity , out price ]\n }"
+  },
+  {
+    "natural_language": "The seller responds with a quote containing price and delivery date.",
+    "bspl": "Quote {\n  roles B, S\n  parameters in ID key, in pdct_key, in price, in quantity, out delivery_date\n S → B: quote [ in ID, in pdct_key, in price, in quantity, out delivery_date ]\n }"
+  },
+  {
+    "natural_language": "The customer requests account balance from the bank, which replies with the current balance.",
+    "bspl": "BalanceRequest {\n roles C, B\n  parameters in account_id, out balance C → B: request [in account_id, out balance]\n}\n"
+  },
+  {
+    "natural_language": "Create a protocol named \"Ship\" that models the operation \"Dispatch\" involving two roles: Sender and Receiver. The input parameters should be \"packageID\" (as a key) and \"address\". \"Dispatch\" is performed from Sender to Receiver using these parameters.",
+    "bspl": "Ship {\n    roles Sender, Receiver\n    parameters in package_key , in address\n    Sender → Receiver: dispatch [ in package_key , in address ]\n}"
+  },
+  {
+    "natural_language": "Write a protocol called \"Appointment\" capturing the process of scheduling between a Client and a ServiceProvider. Parameters include a \"ref_key\" (input key), \"date\", and \"confirmation\". The operation \"requestAppointment\" goes from Client to ServiceProvider; \"confirmAppointment\" is from ServiceProvider to Client.",
+    "bspl": "Appointment {\n    roles Client, ServiceProvider\n    parameters in ref_key , out date , out confirmation\n    Client → ServiceProvider: requestAppointment [ in ref_key , out date ]\n    ServiceProvider → Client: confirmAppointment [ in ref_key , in date , out confirmation ]\n}"
+  },
+  {
+    "natural_language": "Define a protocol named \"Register\" with two roles, User and System. The User sends a \"register\" message to the System with \"user_key\" (key) and \"email\". The System replies with an \"ack\" message.",
+    "bspl": "Register {\n    roles User, System\n    parameters in user_key , in email\n    User → System: register [ in user_key , in email ]\n    System → User: ack [ in user_key ]\n}"
+  },
+  {
+    "natural_language": "Design a protocol called \"Delivery\" for tracking parcels, with Shipper and Customer as roles. Input parameters is \"tracking_key\" (key), output parameters are \"status\" and \"timestamp\". Shipper notifies Customer about updates using an \"update\" operation.",
+    "bspl": "Delivery {\n    roles Shipper, Customer\n    parameters in ID, out status , out timestamp\n    Shipper → Customer: update [ in ID , out status , out timestamp ]\n}"
+  },
+  {
+    "natural_language": "Provide a protocol named \"Loan\" modeling loan application and approval between Applicant and Bank. Parameters: \"application_key\" (input key), \"amount\", and \"decision\" (output). Applicant sends \"apply\" to Bank, who responds with \"approve\".",
+    "bspl": "Loan {\n    roles Applicant, Bank\n    parameters in application_key , in amount , out decision\n    Applicant → Bank: apply [ in application_key , in amount ]\n    Bank → Applicant: approve [ in application_key , in amount , out decision ]\n}"
+  },
+  {
+    "natural_language": "Define a protocol \"Feedback\" for collecting and confirming feedback. Roles: Customer and Business. Parameters: \"feedback_key\" (input key), \"content\", \"response\" (output). Customer sends \"submit\" to Business; Business sends \"respond\" message back.",
+    "bspl": "Feedback {\n    roles Customer, Business\n    parameters in ID , in content , out response\n    Customer → Business: submit [ in ID , in content ]\n    Business → Customer: respond [ in ID , in content , out response ]\n}"
+  }
+]

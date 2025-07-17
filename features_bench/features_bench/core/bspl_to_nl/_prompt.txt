@@ -1,0 +1,11 @@
+$context_content
+
+EXAMPLES:
+$examples
+
+EXECUTION:
+Recollect what is written in the TASK and EXPECTED OUTPUT sections. Please translate this valid
+ BSPL Payload to natural language so to contain all the information needed for another agent to
+ rebuild univoquely the original payload:
+
+$payload

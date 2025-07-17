@@ -1,0 +1,11 @@
+Pack {
+  roles W, P, S // Warehouse, Packer, Scanner
+  parameters in ID key, in order, out tag, out package
+  private data, written
+
+  W $\mo$ P: Pack[in ID key, in order]
+  P $\mo$ W: Tag[in ID key, in order, out tag]
+  P $\mo$ S: WriteTag[in ID key, in order, in tag, out data]
+  S $\mo$ P: TagWritten[in ID key, in tag, in data, out written]
+  P $\mo$ W: Packed[in ID key, in written, out package]
+}
